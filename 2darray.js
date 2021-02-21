@@ -24,23 +24,23 @@ function createCols(row, i, j) {
   let p = document.createElement('p');
   p.id = `x${j}-y${i}`;
   p.className = 'row-elements';
-  p.innerHTML = j;
+  p.innerHTML = `R${i}:C${j} `;
   p.addEventListener('click', () => {
     console.log(`You clicked at row: ${i} column ${j}`);
   });
   row.appendChild(p);
 }
 
-function renderRows(startAt) {
-  for (let i = startAt; i < startAt + 5; i++) {
+function renderRows(xPosition) {
+  for (let i = xPosition; i < xPosition + 5; i++) {
     createRows('row-' + i);
   }
 }
 
-function renderCols(x, y) {
-  for (let i = x; i < x + 5; i++) {
+function renderCols(xPosition, yPosition) {
+  for (let i = xPosition; i < xPosition + 5; i++) {
     let row = document.getElementById('row-' + i);
-    for (let j = y; j < y + 5; j++) {
+    for (let j = yPosition; j < yPosition + 5; j++) {
       createCols(row, i, j);
     }
   }
@@ -54,7 +54,31 @@ document.getElementById('right').addEventListener('click', () => {
   colPosition += 5;
   renderRows(rowPosition);
   renderCols(rowPosition, colPosition);
-  //reRender();
+  reRender();
+});
+
+document.getElementById('left').addEventListener('click', () => {
+  document.getElementById('outerDiv').innerHTML = '';
+  colPosition -= 5;
+  renderRows(rowPosition);
+  renderCols(rowPosition, colPosition);
+  reRender();
+});
+
+document.getElementById('up').addEventListener('click', () => {
+  document.getElementById('outerDiv').innerHTML = '';
+  rowPosition -= 5;
+  renderRows(rowPosition);
+  renderCols(rowPosition, colPosition);
+  reRender();
+});
+
+document.getElementById('down').addEventListener('click', () => {
+  document.getElementById('outerDiv').innerHTML = '';
+  rowPosition += 5;
+  renderRows(rowPosition);
+  renderCols(rowPosition, colPosition);
+  reRender();
 });
 
 let startAt = 0;
@@ -78,22 +102,6 @@ let button = document.createElement('button');
 button.innerText = 'Click Me';
 button.addEventListener('click', () => console.log("I'm button"));
 replaceElement('x2-y1', button);
-
-document.getElementById('back').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  renderRows(startAt - 5);
-  renderCols(startAt - 5);
-  startAt = startAt - 5;
-  reRender();
-});
-
-document.getElementById('next').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  renderRows(startAt + 5);
-  renderCols(startAt + 5);
-  startAt = startAt + 5;
-  reRender();
-});
 
 function reRender() {
   replaceElement('x2-y1', button);
