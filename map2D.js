@@ -46,41 +46,6 @@ function renderCols(xPosition, yPosition) {
   }
 }
 
-let rowPosition = 0;
-let colPosition = 0;
-
-document.getElementById('right').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  colPosition += 5;
-  renderRows(rowPosition);
-  renderCols(rowPosition, colPosition);
-  reRender();
-});
-
-document.getElementById('left').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  colPosition -= 5;
-  renderRows(rowPosition);
-  renderCols(rowPosition, colPosition);
-  reRender();
-});
-
-document.getElementById('up').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  rowPosition -= 5;
-  renderRows(rowPosition);
-  renderCols(rowPosition, colPosition);
-  reRender();
-});
-
-document.getElementById('down').addEventListener('click', () => {
-  document.getElementById('outerDiv').innerHTML = '';
-  rowPosition += 5;
-  renderRows(rowPosition);
-  renderCols(rowPosition, colPosition);
-  reRender();
-});
-
 let startAt = 0;
 renderRows(startAt, startAt);
 renderCols(startAt, startAt);
