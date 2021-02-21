@@ -37,17 +37,29 @@ function renderRows(startAt) {
   }
 }
 
-function renderCols(startAt) {
-  for (let i = startAt; i < startAt + 5; i++) {
+function renderCols(x, y) {
+  for (let i = x; i < x + 5; i++) {
     let row = document.getElementById('row-' + i);
-    for (let j = startAt; j < startAt + 5; j++) {
+    for (let j = y; j < y + 5; j++) {
       createCols(row, i, j);
     }
   }
 }
+
+let rowPosition = 0;
+let colPosition = 0;
+
+document.getElementById('right').addEventListener('click', () => {
+  document.getElementById('outerDiv').innerHTML = '';
+  colPosition += 5;
+  renderRows(rowPosition);
+  renderCols(rowPosition, colPosition);
+  //reRender();
+});
+
 let startAt = 0;
-renderRows(startAt);
-renderCols(startAt);
+renderRows(startAt, startAt);
+renderCols(startAt, startAt);
 
 function replaceElement(id, element) {
   if (!document.getElementById(id)) {
